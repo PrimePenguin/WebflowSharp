@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
+using WebflowSharp.Extensions;
 
-namespace WebflowSharp
+namespace WebflowSharp.Infrastructure
 {
     /// <summary>
     /// An abstract class for parameterizing certain objects.
@@ -15,9 +15,12 @@ namespace WebflowSharp
         /// <summary>
         /// Converts the object to an array of KVPs.
         /// </summary>
-        public virtual IEnumerable<KeyValuePair<string, object>> ToQueryParameters()
+        public virtual IEnumerable<KeyValuePair<string, object>> ToParameters()
         {
             var output = new List<KeyValuePair<string, object>>();
+
+            // TODO: Create a recursive function that will aggregate the declaredproperties for
+            // this type and this type's base type (and that type's base type, and so on).
 
             //Inspiration for this code from https://github.com/jaymedavis/stripe.net
             foreach (PropertyInfo property in GetType().GetAllDeclaredProperties())
@@ -56,29 +59,14 @@ namespace WebflowSharp
         /// <param name="value">The property's value.</param>
         /// <param name="property">The property itself.</param>
         /// <returns>The new parameter.</returns>
-        protected virtual KeyValuePair<string, object> ToSingleParameter(string propName, object value, PropertyInfo property)
+        public virtual KeyValuePair<string, object> ToSingleParameter(string propName, object value, PropertyInfo property)
         {
-            KeyValuePair<string, object> Join<T>(IEnumerable<T> values)
+            if (value is IEnumerable<long>)
             {
-                return new KeyValuePair<string, object>(propName, string.Join(",", values));
+                return new KeyValuePair<string, object>(propName, string.Join(",", value as IEnumerable<long>));
             }
 
-            switch (value)
-            {
-                case IEnumerable<long> longs:
-                    return Join(longs);
-                
-                case IEnumerable<int> ints:
-                    return Join(ints);
-                
-                case IEnumerable<string> strings:
-                    return Join(strings);
-                
-                case IEnumerable<bool> bools:
-                    return Join(bools);
-            }
-
-            var valueType = value.GetType();
+            Type valueType = value.GetType();
 
             if (valueType.GetTypeInfo().IsEnum)
             {

@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace WebflowSharp
+namespace WebflowSharp.Extensions
 {
     /// <summary>
     /// Enum Extension Method
     /// </summary>
-    internal static class EnumExtensions
+    public static class EnumExtensions
     {
         /// <summary>
         /// Reads and uses the enum's <see cref="EnumMemberAttribute"/> for serialization.
@@ -23,7 +21,7 @@ namespace WebflowSharp
             string name = input.ToString();
             var info = input.GetType().GetTypeInfo().DeclaredMembers.Where(i => i.Name == name);
 
-            if (info.Any())
+            if (info.Count() > 0)
             {
                 var attribute = info.First().GetCustomAttribute<EnumMemberAttribute>();
 
@@ -47,7 +45,7 @@ namespace WebflowSharp
             {
                 foreach (var enumItem in enumList)
                 {
-                    list.Add(EnumExtensions.ToSerializedString(enumItem as Enum));
+                    list.Add((enumItem as Enum).ToSerializedString());
                 }
             }
             return string.Join(",", list);

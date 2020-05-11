@@ -1,26 +1,13 @@
 ﻿using System;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using WebflowSharp.Infrastructure;
 
-namespace WebflowSharp
+namespace WebflowSharp.Infrastructure.Policies
 {
-    /// <summary>
-    /// See https://help.shopify.com/api/guides/api-call-limit
-    /// </summary>
     public class RetryExecutionPolicy : IRequestExecutionPolicy
     {
         private static readonly TimeSpan RETRY_DELAY = TimeSpan.FromMilliseconds(500);
 
-        private readonly bool _retryOnlyIfLeakyBucketFull;
-
-        public RetryExecutionPolicy(bool retryOnlyIfLeakyBucketFull = true)
-        {
-            _retryOnlyIfLeakyBucketFull = retryOnlyIfLeakyBucketFull;
-        }
-
-        public async Task<RequestResult<T>> Run<T>(CloneableRequestMessage baseRequest, ExecuteRequestAsync<T> executeRequestAsync, CancellationToken cancellationToken)
+        public async Task<T> Run<T>(CloneableRequestMessage baseRequest, ExecuteRequestAsync<T> executeRequestAsync)
         {
             while (true)
             {
@@ -30,14 +17,11 @@ namespace WebflowSharp
                 {
                     var fullResult = await executeRequestAsync(request);
 
-                    return fullResult;
+                    return fullResult.Result;
                 }
-                catch (ShopifyRateLimitException ex) when (ex.Reason == ShopifyRateLimitReason.BucketFull || !_retryOnlyIfLeakyBucketFull)
+                catch (WebflowRateLimitException)
                 {
-                    //Only retry if breach caused by full bucket
-                    //Other limits will bubble the exception because it's not clear how long the program should wait
-                    //Even if there is a Retry-After header, we probably don't want the thread to sleep for potentially many hours
-                    await Task.Delay(RETRY_DELAY, cancellationToken);
+                    await Task.Delay(RETRY_DELAY);
                 }
             }
         }

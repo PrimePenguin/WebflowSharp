@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace WebflowSharp
+namespace WebflowSharp.Infrastructure
 {
     public class RequestResult<T>
     {
@@ -9,18 +9,12 @@ namespace WebflowSharp
         public T Result { get; }
 
         public string RawResult { get; }
-        
-        /// <summary>
-        /// Only exists for list requests, will be null or empty for all others. 
-        /// </summary>
-        public string RawLinkHeaderValue { get; }
 
-        public RequestResult(HttpResponseMessage response, T result, string rawResult, string rawLinkHeaderValue)
+        public RequestResult(HttpResponseMessage response, T result, string rawResult)
         {
-            this.Response = response;
-            this.Result = result;
-            this.RawResult = rawResult;
-            this.RawLinkHeaderValue = rawLinkHeaderValue;
+            Response = response;
+            Result = result;
+            RawResult = rawResult;
         }
     }
 }
