@@ -6,31 +6,35 @@ namespace WebflowSharp.Infrastructure
 {
     public class WebflowException : Exception
     {
-        [JsonIgnore]
+       [JsonProperty("code")]
         public HttpStatusCode HttpStatusCode { get; set; }
 
         /// <summary>
-        /// The type and subtype fields are general purpose descriptors of the kind of error that occurred. The possible values of each are documented per endpoint.
+        /// 	Path of request resulting in error
         /// </summary>
-        public string Type { get; set; }
+        [JsonProperty("path")]
+        public string Path { get; set; }
 
         /// <summary>
-        /// The type and subtype fields are general purpose descriptors of the kind of error that occurred. The possible values of each are documented per endpoint.
+        /// 	Name of error
         /// </summary>
-        public string SubType { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// The message field is intended for you, the developer, and shouldn't be displayed to an end-user or client. The message field will typically contain detailed debug information.
         /// </summary>
+        [JsonProperty("msg")]
         public string Message { get; set; }
 
         /// <summary>
-        /// The details field is intended for machine-readable usage in generating user-friendly error messages for you and your users. Note that this field will be null unless otherwise specified.
+        /// 	Full error string
         /// </summary>
-        public string Details { get; set; }
+        [JsonProperty("err")]
+        public string Error { get; set; }
 
         /// <summary>
-        /// The contextId field is intended for communicating a server error with Squarespace Customer Care. Please do not hesitate to report this context id along with any occurrences of 5xx-class errors.
+        /// The contextId field is intended for communicating a server error with Webflow Customer Care. Please do not hesitate to report this context id along with any occurrences of 5xx-class errors.
         /// </summary>
         public string ContextId { get; set; }
 
@@ -38,13 +42,13 @@ namespace WebflowSharp.Infrastructure
 
         public WebflowException(string message) : base(message) { }
 
-        public WebflowException(HttpStatusCode httpStatusCode, string type, string subType, string message, string details) : base(message)
+        public WebflowException(HttpStatusCode httpStatusCode, string path, string name, string message, string error) : base(message)
         {
             HttpStatusCode = httpStatusCode;
-            Type = type;
-            SubType = subType;
+            Path = path;
+            Name = name;
             Message = message;
-            Details = details;
+            Error = error;
         }
     }
 }

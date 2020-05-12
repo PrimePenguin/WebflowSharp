@@ -52,9 +52,15 @@ namespace WebflowSharp.Services
         {
             return new Uri($"https://api.webflow.com/sites{_siteId}");
         }
+
         protected RequestUri PrepareRequest(string path)
         {
-            return new RequestUri(new Uri($"https://api.webflow.com/{path}"));
+            return new RequestUri(new Uri($"https://api.webflow.com/sites{_siteId}/{path}"));
+        }
+
+        protected RequestUri PrepareAuthInfoRequest()
+        {
+            return new RequestUri(new Uri($"https://api.webflow.com/info"));
         }
 
         /// <summary>

@@ -1,27 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace WebflowSharp.Entities
 {
-    public class Temperatures
-    {
-        [JsonProperty("items")]
-        public List<Item> Items { get; set; }
-
-        [JsonProperty("count")]
-        public long Count { get; set; }
-
-        [JsonProperty("limit")]
-        public long Limit { get; set; }
-
-        [JsonProperty("offset")]
-        public long Offset { get; set; }
-
-        [JsonProperty("total")]
-        public long Total { get; set; }
-    }
-
     public class Item
     {
         /// <summary>

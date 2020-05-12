@@ -3,14 +3,8 @@ using WebflowSharp.Infrastructure;
 
 namespace WebflowSharp.Entities
 {
-    public class OrderQueryParameters : Parameterizable
+    public class CollectionQueryParameters : Parameterizable
     {
-        /// <summary>
-        /// Filter orders in one of the following statuses: <br>pending</br> <br>refunded</br> <br>dispute-lost</br> <br>fulfilled</br> <br>disputed</br> <br>unfulfilled</br>
-        /// </summary>
-        [JsonProperty("status")]
-        public string Status { get; set; }
-
         /// <summary>
         /// 	Maximum number of orders to be returned (max limit: 100)
         /// </summary>

@@ -13,6 +13,6 @@ namespace WebflowSharp.Infrastructure
 
         public WebflowRateLimitException(string message) : base(message) { }
 
-        public WebflowRateLimitException(HttpStatusCode httpStatusCode, string type, string subType, string message, string details) : base(httpStatusCode, type, subType, message, details) { }
+        public WebflowRateLimitException(HttpStatusCode httpStatusCode, string path, string name, string message, string error) : base(httpStatusCode, path, name, message, error) { }
     }
 }

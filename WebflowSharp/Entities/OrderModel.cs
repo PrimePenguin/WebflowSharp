@@ -147,7 +147,7 @@ namespace WebflowSharp.Entities
         public long PostalCode { get; set; }
     }
 
-    public  class CustomDatum
+    public class CustomDatum
     {
         [JsonProperty("textInput", NullValueHandling = NullValueHandling.Ignore)]
         public string TextInput { get; set; }
@@ -161,14 +161,14 @@ namespace WebflowSharp.Entities
         public bool? Checkbox { get; set; }
     }
 
-    public  class CustomerInfo
+    public class CustomerInfo
     {
         [JsonProperty("fullName")] public string FullName { get; set; }
 
         [JsonProperty("email")] public string Email { get; set; }
     }
 
-    public  class CustomerPaid
+    public class CustomerPaid
     {
         [JsonProperty("unit")] public string Unit { get; set; }
 
@@ -177,7 +177,7 @@ namespace WebflowSharp.Entities
         [JsonProperty("string")] public string String { get; set; }
     }
 
-    public  class PurchasedItem
+    public class PurchasedItem
     {
         /// <summary>
         /// Number of item purchased.
@@ -220,14 +220,14 @@ namespace WebflowSharp.Entities
         [JsonProperty("variantPrice")] public CustomerPaid VariantPrice { get; set; }
     }
 
-    public  class VariantImage
+    public class VariantImage
     {
         [JsonProperty("fileId")] public string FileId { get; set; }
 
         [JsonProperty("url")] public Uri Url { get; set; }
     }
 
-    public  class StripeCard
+    public class StripeCard
     {
         [JsonProperty("last4")]
         public long Last4 { get; set; }
@@ -239,14 +239,14 @@ namespace WebflowSharp.Entities
         [JsonProperty("expires")] public Expires Expires { get; set; }
     }
 
-    public  class Expires
+    public class Expires
     {
         [JsonProperty("year")] public long Year { get; set; }
 
         [JsonProperty("month")] public long Month { get; set; }
     }
 
-    public  class StripeDetails
+    public class StripeDetails
     {
         [JsonProperty("refundReason")] public string RefundReason { get; set; }
 
@@ -271,7 +271,7 @@ namespace WebflowSharp.Entities
         [JsonProperty("customerId")] public string CustomerId { get; set; }
     }
 
-    public  class Totals
+    public class Totals
     {
         [JsonProperty("subtotal")] public CustomerPaid Subtotal { get; set; }
 
@@ -280,7 +280,7 @@ namespace WebflowSharp.Entities
         [JsonProperty("total")] public CustomerPaid Total { get; set; }
     }
 
-    public  class Extra
+    public class Extra
     {
         /// <summary>
         /// 	The type of extra item this is. Either “shipping” or “tax”
