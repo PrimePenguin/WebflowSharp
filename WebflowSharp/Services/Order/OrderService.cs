@@ -8,29 +8,31 @@ namespace WebflowSharp.Services.Order
 {
     public class OrderService : WebflowService
     {
-        protected OrderService(string siteId, string secretApiKey) : base(siteId, secretApiKey)
+        protected OrderService(string shopAccessToken) : base(shopAccessToken)
         {
         }
 
         /// <summary>
-        /// Returns collection of orders
+        /// Get a list of all orders created for a given site.
         /// </summary>
+        /// <param name="siteId">	Unique identifier for the site</param>
         /// <param name="queryParameters">Order query parameters</param>
-        public virtual async Task<OrderQueryResponse> GetOrders(OrderQueryParameters queryParameters = null)
+        public virtual async Task<OrderQueryResponse> GetOrders(string siteId, OrderQueryParameters queryParameters = null)
         {
-            var req = PrepareRequest("orders");
+            var req = PrepareRequest($"sites/{siteId}/orders");
             if (queryParameters != null) req.QueryParams.AddRange(queryParameters.ToParameters());
             return await ExecuteRequestAsync<OrderQueryResponse>(req, HttpMethod.Get);
         }
 
         /// <summary>
-        /// Returns a order with provided ID.
+        /// Retrieve a specific order placed for a site.
         /// </summary>
         /// <param name="orderId">Unique identifier for the order</param>
+        /// <param name="siteId">	Unique identifier for the site</param>
         ///<returns>OrderModel</returns>
-        public virtual async Task<OrderModel> GetOrderById(string orderId)
+        public virtual async Task<OrderModel> GetOrderById(string siteId, string orderId)
         {
-            var req = PrepareRequest($"order/{orderId}");
+            var req = PrepareRequest($"sites/{siteId}/order/{orderId}/");
             return await ExecuteRequestAsync<OrderModel>(req, HttpMethod.Get);
         }
 
@@ -38,10 +40,11 @@ namespace WebflowSharp.Services.Order
         /// Updates an order’s status to fulfilled
         /// </summary>
         /// <param name="orderId">	Unique identifier for the order</param>
+        /// <param name="siteId">	Unique identifier for the site</param>
         /// <returns>The <see cref="Order"/>OrderModel</returns>
-        public virtual async Task<OrderModel> FulfillOrder(string orderId)
+        public virtual async Task<OrderModel> FulfillOrder(string siteId, string orderId)
         {
-            var req = PrepareRequest($"order/{orderId}/fulfill");
+            var req = PrepareRequest($"sites/{siteId}/order/{orderId}/fulfill");
             return await ExecuteRequestAsync<OrderModel>(req, HttpMethod.Post);
         }
 
@@ -49,10 +52,11 @@ namespace WebflowSharp.Services.Order
         /// Updates an order’s status to unfulfilled
         /// </summary>
         /// <param name="orderId">	Unique identifier for the order</param>
+        /// <param name="siteId">	Unique identifier for the site</param>
         /// <returns>The <see cref="Order"/>OrderModel</returns>
-        public virtual async Task<OrderModel> UnFulfillOrder(string orderId)
+        public virtual async Task<OrderModel> UnFulfillOrder(string siteId, string orderId)
         {
-            var req = PrepareRequest($"order/{orderId}/unfulfill");
+            var req = PrepareRequest($"sites/{siteId}/order/{orderId}/unfulfill");
             return await ExecuteRequestAsync<OrderModel>(req, HttpMethod.Post);
         }
 
@@ -60,11 +64,12 @@ namespace WebflowSharp.Services.Order
         /// This API lets you update the fields, comment, shippingProvider, and/or shippingTracking for a given order. All three fields can be updated simultaneously or independently.
         /// </summary>
         /// <param name="orderId">Requested order ID, specifies the order to update.</param>
+        /// <param name="siteId">	Unique identifier for the site</param>
         ///  /// <param name="fields">update fields value</param>
         /// <returns>The <see cref="Order"/>.</returns>
-        public virtual async Task<OrderModel> UpdateOrder(string orderId, UpdateOrderFields fields)
+        public virtual async Task<OrderModel> UpdateOrder(string siteId, string orderId, UpdateOrderFields fields)
         {
-            var req = PrepareRequest($"order/{orderId}");
+            var req = PrepareRequest($"sites/{siteId}/order/{orderId}/");
             HttpContent content = null;
 
             if (fields != null)
@@ -80,10 +85,11 @@ namespace WebflowSharp.Services.Order
         /// This API will reverse a Stripe charge and refund an order back to a customer. It will also set the order’s status to refunded..
         /// </summary>
         /// <param name="orderId">Requested order ID</param>
+        /// <param name="siteId">	Unique identifier for the site</param>
         /// <returns>The <see cref="Order"/>.</returns>
-        public virtual async Task<OrderModel> RefundOrder(string orderId)
+        public virtual async Task<OrderModel> RefundOrder(string siteId, string orderId)
         {
-            var req = PrepareRequest($"order/{orderId}/refund");
+            var req = PrepareRequest($"sites/{siteId}/order/{orderId}/refund");
             return await ExecuteRequestAsync<OrderModel>(req, HttpMethod.Post);
         }
     }

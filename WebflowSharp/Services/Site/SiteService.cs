@@ -6,7 +6,7 @@ namespace WebflowSharp.Services.Site
 {
     public class SiteService : WebflowService
     {
-        protected SiteService(string siteId, string secretApiKey) : base(siteId, secretApiKey)
+        protected SiteService(string shopAccessToken) : base(shopAccessToken)
         {
         }
 

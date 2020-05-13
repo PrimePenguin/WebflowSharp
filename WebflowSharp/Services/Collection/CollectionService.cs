@@ -9,16 +9,17 @@ namespace WebflowSharp.Services.Collection
 {
     public class CollectionService : WebflowService
     {
-        protected CollectionService(string siteId, string secretApiKey) : base(siteId, secretApiKey)
+        protected CollectionService(string shopAccessToken) : base(shopAccessToken)
         {
         }
 
         /// <summary>
         /// Returns List of collection
         /// </summary>
-        public virtual async Task<List<Entities.Collection>> GetCollections()
+        /// <param name="siteId">	Unique identifier for the site</param>
+        public virtual async Task<List<Entities.Collection>> GetCollections(string siteId)
         {
-            var req = PrepareRequest("collections");
+            var req = PrepareRequest($"sites/{siteId}/collections");
             return await ExecuteRequestAsync<List<Entities.Collection>>(req, HttpMethod.Get);
         }
 

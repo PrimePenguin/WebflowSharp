@@ -30,37 +30,36 @@ namespace WebflowSharp.Services
         /// <summary>
         /// Creates a new instance of <see cref="WebflowService" />.
         /// </summary>
-        /// <param name="siteId">Unique identifier for the site</param>
-        /// <param name="secretApiKey">access token</param>
-        protected WebflowService(string siteId, string secretApiKey)
+        /// <param name="shopAccessToken">access token</param>
+        protected WebflowService(string shopAccessToken)
         {
-            _ShopUri = BuildWebflowkApiUri();
-            _accessToken = secretApiKey;
-            _siteId = siteId;
+            _accessToken = shopAccessToken;
 
             // If there's a global execution policy it should be set as this instance's policy.
             // User can override it with instance-specific execution policy.
             _ExecutionPolicy = _GlobalExecutionPolicy ?? new DefaultRequestExecutionPolicy();
         }
 
-        /// <summary>
-        /// Attempts to build a shop API <see cref="Uri"/> for the given shop. Will throw a <see cref="WebflowException"/> if the URL cannot be formatted.
-        /// </summary>
-        /// <exception cref="WebflowException">Thrown if the given URL cannot be converted into a well-formed URI.</exception>
-        /// <returns>The shop's API <see cref="Uri"/>.</returns>
-        public Uri BuildWebflowkApiUri()
+        public static Uri BuildWebFlowUri(string webFlowUrl)
         {
-            return new Uri($"https://api.webflow.com/sites{_siteId}");
+            if (Uri.IsWellFormedUriString(webFlowUrl, UriKind.Absolute) == false)
+            {
+                webFlowUrl = "https://" + webFlowUrl;
+            }
+
+            var builder = new UriBuilder(webFlowUrl)
+            {
+                Scheme = "https:",
+                Port = 443, //SSL port
+                Path = ""
+            };
+
+            return builder.Uri;
         }
 
         protected RequestUri PrepareRequest(string path)
         {
-            return new RequestUri(new Uri($"https://api.webflow.com/sites{_siteId}/{path}"));
-        }
-
-        protected RequestUri PrepareAuthInfoRequest()
-        {
-            return new RequestUri(new Uri($"https://api.webflow.com/info"));
+            return new RequestUri(new Uri($"https://api.webflow.com/{path}"));
         }
 
         /// <summary>
@@ -75,8 +74,8 @@ namespace WebflowSharp.Services
                 msg.Headers.Add("Authorization", $"Bearer {_accessToken}");
             }
 
-            msg.Headers.Add("Accept", "application/json");
-            msg.Headers.Add("user-agent", "WebflowSharp");
+            //msg.Headers.Add("Accept", "application/json");
+            msg.Headers.Add("accept-version", "1.0.0");
             if (method == HttpMethod.Post)
             {
                 msg.Headers.Add("Idempotency-Key", Guid.NewGuid().ToString());

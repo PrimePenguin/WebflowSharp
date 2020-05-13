@@ -8,7 +8,7 @@ namespace WebflowSharp.Services.ItemInventory
 {
     public class ItemInventory : WebflowService
     {
-        protected ItemInventory(string siteId, string secretApiKey) : base(siteId, secretApiKey)
+        protected ItemInventory(string shopAccessToken) : base(shopAccessToken)
         {
         }
 
