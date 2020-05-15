@@ -19,7 +19,7 @@ namespace WebflowSharp.Entities
         public DateTimeOffset LastUsed { get; set; }
 
         [JsonProperty("sites")]
-        public List<object> Sites { get; set; }
+        public List<string> Sites { get; set; }
 
         [JsonProperty("orgs")]
         public List<string> Orgs { get; set; }

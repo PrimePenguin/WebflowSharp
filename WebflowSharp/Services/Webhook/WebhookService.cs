@@ -7,9 +7,9 @@ using WebflowSharp.Infrastructure;
 
 namespace WebflowSharp.Services.Webhook
 {
-    class WebhookService : WebflowService
+    public class WebhookService : WebflowService
     {
-        protected WebhookService(string shopAccessToken) : base(shopAccessToken)
+        public WebhookService(string shopAccessToken) : base(shopAccessToken)
         {
         }
 
@@ -41,7 +41,7 @@ namespace WebflowSharp.Services.Webhook
         ///  /// <param name="request">update fields value</param>
         /// <param name="siteId">	Unique identifier for the site</param>
         /// <returns>The <see cref="Order"/>.</returns>
-        public virtual async Task<OrderModel> CreateWebhook(string siteId, CreateWebhookRequest request)
+        public virtual async Task<WebhookModel> CreateWebhook(string siteId, CreateWebhookRequest request)
         {
             var req = PrepareRequest($"sites/{siteId}/webhooks");
             HttpContent content = null;
@@ -52,7 +52,7 @@ namespace WebflowSharp.Services.Webhook
                 content = new JsonContent(body);
             }
 
-            return await ExecuteRequestAsync<OrderModel>(req, HttpMethod.Patch, content);
+            return await ExecuteRequestAsync<WebhookModel>(req, HttpMethod.Post, content);
         }
 
         /// <summary>

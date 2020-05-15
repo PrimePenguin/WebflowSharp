@@ -94,8 +94,7 @@ namespace WebflowSharp.Services
                 var policyResult = await _ExecutionPolicy.Run(baseRequestMessage, async requestMessage =>
                 {
                     var request = _Client.SendAsync(requestMessage);
-                    var result = new T();
-
+              
                     using (var response = await request)
                     {
                         var rawResult = await response.Content.ReadAsStringAsync();
@@ -106,10 +105,16 @@ namespace WebflowSharp.Services
                         // This method may fail when the method was Delete, which is intendend.
                         // Delete methods should not be parsing the response JSON and should instead
                         // be using the non-generic ExecuteRequestAsync.
-                        var reader = new JsonTextReader(new StringReader(rawResult));
-                        var data = _Serializer.Deserialize<JObject>(reader);
-                        if (data != null) result = data.ToObject<T>();
-                        return new RequestResult<T>(response, result, rawResult);
+                        try
+                        {
+                            var result = JsonConvert.DeserializeObject<T>(rawResult);
+                            return new RequestResult<T>(response, result, rawResult);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
                     }
                 });
 

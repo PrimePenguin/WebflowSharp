@@ -9,7 +9,7 @@ namespace WebflowSharp.Services.Collection
 {
     public class CollectionService : WebflowService
     {
-        protected CollectionService(string shopAccessToken) : base(shopAccessToken)
+        public CollectionService(string shopAccessToken) : base(shopAccessToken)
         {
         }
 
@@ -17,10 +17,10 @@ namespace WebflowSharp.Services.Collection
         /// Returns List of collection
         /// </summary>
         /// <param name="siteId">	Unique identifier for the site</param>
-        public virtual async Task<List<Entities.Collection>> GetCollections(string siteId)
+        public virtual async Task<List<SiteCollection>> GetCollections(string siteId)
         {
             var req = PrepareRequest($"sites/{siteId}/collections");
-            return await ExecuteRequestAsync<List<Entities.Collection>>(req, HttpMethod.Get);
+            return await ExecuteRequestAsync<List<SiteCollection>>(req, HttpMethod.Get);
         }
 
         /// <summary>
@@ -28,10 +28,10 @@ namespace WebflowSharp.Services.Collection
         /// </summary>
         /// <param name="collectionId">Unique identifier for the Collection</param>
         /// <returns>The <see cref="Order"/>.</returns>
-        public virtual async Task<Entities.Collection> GetCollectionById(string collectionId)
+        public virtual async Task<SiteCollection> GetCollectionById(string collectionId)
         {
             var req = PrepareRequest($"collections/{collectionId}");
-            return await ExecuteRequestAsync<Entities.Collection>(req, HttpMethod.Get);
+            return await ExecuteRequestAsync<SiteCollection>(req, HttpMethod.Get);
         }
         
         /// <summary>

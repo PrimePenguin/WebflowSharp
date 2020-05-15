@@ -9,7 +9,7 @@ namespace WebflowSharp.Entities
         /// 	List of Items within the Collection
         /// </summary>
         [JsonProperty("items")]
-        public List<Item> Items { get; set; }
+        public List<Item> CollectionItems { get; set; }
 
         /// <summary>
         /// 	Number of items returned

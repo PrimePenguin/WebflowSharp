@@ -90,13 +90,19 @@ namespace WebflowSharp.Entities
         /// 	Unique identifier for the Collection the Item belongs within
         /// </summary>
         [JsonProperty("_cid")]
-        public string Cid { get; set; }
+        public string CollectionId { get; set; }
 
         /// <summary>
         /// 	Unique identifier for the Item
         /// </summary>
         [JsonProperty("_id")]
         public string Id { get; set; }
+
+        [JsonIgnore]
+        public ItemInventoryResponse Inventory { get; set; }
+
+        [JsonIgnore]
+        public string SiteId { get; set; }
     }
 
     public class Image

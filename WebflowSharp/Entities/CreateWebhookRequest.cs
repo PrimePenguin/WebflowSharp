@@ -14,7 +14,7 @@ namespace WebflowSharp.Entities
         /// Which action the webhook is listening for
         /// </summary>
         [JsonProperty("triggerType")]
-        public FilterType TriggerType { get; set; }
+        public string TriggerType { get; set; }
 
         /// <summary>
         /// 	The https URL on your server the webhook will send a request to when the webhook is triggered

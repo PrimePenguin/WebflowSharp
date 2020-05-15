@@ -18,7 +18,7 @@ namespace WebflowSharp.Entities
         public string Site { get; set; }
 
         [JsonProperty("filter")]
-        public FilterType Filter { get; set; }
+        public string Filter { get; set; }
 
         [JsonProperty("lastUsed")]
         public DateTimeOffset LastUsed { get; set; }

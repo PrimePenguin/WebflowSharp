@@ -2,7 +2,7 @@
 
 namespace WebflowSharp.Entities
 {
-    public class SiteCollection
+    public class BaseCollectionModel
     {
         /// <summary>
         /// The unique identifier for the Collection
@@ -23,13 +23,13 @@ namespace WebflowSharp.Entities
         public string CreatedOn { get; set; }
 
         /// <summary>
-        /// 	Name given to Collection
+        ///  The unique identifier for the Collection
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// 	Slug of Collection in Site URL structure
+        ///	Slug of Collection
         /// </summary>
         [JsonProperty("slug")]
         public string Slug { get; set; }
@@ -41,34 +41,15 @@ namespace WebflowSharp.Entities
         public string SingularName { get; set; }
     }
 
-    public class Validations
+    public class ProductsCollectionModel : BaseCollectionModel
     {
-        [JsonProperty("singleLine", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? SingleLine { get; set; }
-
-        [JsonProperty("collectionId", NullValueHandling = NullValueHandling.Ignore)]
-        public string CollectionId { get; set; }
-
-        [JsonProperty("maxLength", NullValueHandling = NullValueHandling.Ignore)]
-        public long? MaxLength { get; set; }
-
-        [JsonProperty("messages", NullValueHandling = NullValueHandling.Ignore)]
-        public Messages Messages { get; set; }
-
-        [JsonProperty("pattern", NullValueHandling = NullValueHandling.Ignore)]
-        public Pattern Pattern { get; set; }
     }
 
-    public class Messages
+    public class SkusCollectionModel : BaseCollectionModel
     {
-        [JsonProperty("maxLength")]
-        public string MaxLength { get; set; }
-
-        [JsonProperty("pattern")]
-        public string Pattern { get; set; }
     }
 
-    public class Pattern
+    public class CategoriesCollectionModel : BaseCollectionModel
     {
     }
 }
