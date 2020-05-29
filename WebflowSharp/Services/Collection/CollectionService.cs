@@ -37,11 +37,21 @@ namespace WebflowSharp.Services.Collection
         /// <summary>
         /// 	Unique identifier for the Collection you are querying
         /// </summary>
-        public virtual async Task<ItemQueryResponse> GetCollectionItems(string collectionId, CollectionQueryParameters queryParameters)
+        public virtual async Task<ProductQueryResponse> GetCollectionProducts(string collectionId, CollectionQueryParameters queryParameters)
         {
             var req = PrepareRequest($"collections/{collectionId}/items");
             if (queryParameters != null) req.QueryParams.AddRange(queryParameters.ToParameters());
-            return await ExecuteRequestAsync<ItemQueryResponse>(req, HttpMethod.Get);
+            return await ExecuteRequestAsync<ProductQueryResponse>(req, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// 	Unique identifier for the Collection you are querying
+        /// </summary>
+        public virtual async Task<VariantQueryResponse> GetCollectionVariants(string collectionId, CollectionQueryParameters queryParameters)
+        {
+            var req = PrepareRequest($"collections/{collectionId}/items");
+            if (queryParameters != null) req.QueryParams.AddRange(queryParameters.ToParameters());
+            return await ExecuteRequestAsync<VariantQueryResponse>(req, HttpMethod.Get);
         }
 
         /// <summary>

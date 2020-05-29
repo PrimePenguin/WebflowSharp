@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebflowSharp.Entities;
 
 namespace WebflowSharp.Services.Site
 {
@@ -28,6 +29,17 @@ namespace WebflowSharp.Services.Site
         {
             var req = PrepareRequest($"sites/{siteId}");
             return await ExecuteRequestAsync<Entities.Site>(req, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Retrieve ecommerce settings for a site.
+        /// </summary>
+        /// <param name="siteId">Unique identifier for the site</param>
+        /// <returns>The <see cref="Order"/>.</returns>
+        public virtual async Task<EcommerceSettings> GetEcommerceSettings(string siteId)
+        {
+            var req = PrepareRequest($"sites/{siteId}/ecommerce/settings");
+            return await ExecuteRequestAsync<EcommerceSettings>(req, HttpMethod.Get);
         }
     }
 }

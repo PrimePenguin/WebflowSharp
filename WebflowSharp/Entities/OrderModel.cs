@@ -77,6 +77,11 @@ namespace WebflowSharp.Entities
         [JsonProperty("shippingTracking")] public string ShippingTracking { get; set; }
 
         /// <summary>
+        /// 	A string editable by the API user to note the shipping tracking Url for the order (not used by Webflow).
+        /// </summary>
+        [JsonProperty("shippingTrackingURL")] public string ShippingTrackingUrl { get; set; }
+
+        /// <summary>
         /// 	An object with the keys: fullName, and email.
         /// </summary>
         [JsonProperty("customerInfo")] public CustomerInfo CustomerInfo { get; set; }
@@ -117,6 +122,11 @@ namespace WebflowSharp.Entities
         [JsonProperty("stripeCard")] public StripeCard StripeCard { get; set; }
 
         /// <summary>
+        /// 	payment Processor
+        /// </summary>
+        [JsonProperty("paymentProcessor")] public string PaymentProcessor { get; set; }
+
+        /// <summary>
         /// 	An object describing various pricing totals.
         /// </summary>
         [JsonProperty("totals")] public Totals Totals { get; set; }
@@ -143,8 +153,7 @@ namespace WebflowSharp.Entities
 
         [JsonProperty("country")] public string Country { get; set; }
 
-        [JsonProperty("postalCode")]
-        public long PostalCode { get; set; }
+        [JsonProperty("postalCode")] public long PostalCode { get; set; }
     }
 
     public class CustomDatum
@@ -170,11 +179,11 @@ namespace WebflowSharp.Entities
 
     public class CustomerPaid
     {
-        [JsonProperty("unit")] public string Unit { get; set; }
+        [JsonProperty("unit")] public string CurrencyUnit { get; set; }
 
         [JsonProperty("value")] public long Value { get; set; }
 
-        [JsonProperty("string")] public string String { get; set; }
+        [JsonProperty("string")] public string PriceWithCurrency { get; set; }
     }
 
     public class PurchasedItem
@@ -195,6 +204,11 @@ namespace WebflowSharp.Entities
         [JsonProperty("productName")] public string ProductName { get; set; }
 
         /// <summary>
+        /// 	Product Id
+        /// </summary>
+        [JsonProperty("productId")] public string ProductId { get; set; }
+
+        /// <summary>
         /// 	Slug of the product.
         /// </summary>
         [JsonProperty("productSlug")] public string ProductSlug { get; set; }
@@ -205,9 +219,19 @@ namespace WebflowSharp.Entities
         [JsonProperty("variantName")] public string VariantName { get; set; }
 
         /// <summary>
+        /// 	Variant Id
+        /// </summary>
+        [JsonProperty("variantId")] public string VariantId { get; set; }
+
+        /// <summary>
         /// 	Slug of the variant. (SKU)
         /// </summary>
         [JsonProperty("variantSlug")] public string VariantSlug { get; set; }
+
+        /// <summary>
+        ///  variant (SKU)
+        /// </summary>
+        [JsonProperty("variantSKU")] public string VariantSku { get; set; }
 
         /// <summary>
         /// 	Image object for the variant. (SKU)
@@ -218,6 +242,30 @@ namespace WebflowSharp.Entities
         /// 	Price object for the variant. (SKU)
         /// </summary>
         [JsonProperty("variantPrice")] public CustomerPaid VariantPrice { get; set; }
+
+        /// <summary>
+        /// weight of the product variant
+        /// </summary>
+        [JsonProperty("weight")]
+        public double? Weight { get; set; }
+
+        /// <summary>
+        /// height of the product variant
+        /// </summary>
+        [JsonProperty("height")]
+        public double? Height { get; set; }
+
+        /// <summary>
+        /// width of the product variant
+        /// </summary>
+        [JsonProperty("width")]
+        public double? Width { get; set; }
+
+        /// <summary>
+        /// length of the product variant
+        /// </summary>
+        [JsonProperty("length")]
+        public double? Length { get; set; }
     }
 
     public class VariantImage

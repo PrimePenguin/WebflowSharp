@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using WebflowSharp.Entities;
 using WebflowSharp.Extensions;
@@ -8,7 +9,7 @@ namespace WebflowSharp.Services.Order
 {
     public class OrderService : WebflowService
     {
-        protected OrderService(string shopAccessToken) : base(shopAccessToken)
+        public OrderService(string shopAccessToken) : base(shopAccessToken)
         {
         }
 
@@ -17,11 +18,11 @@ namespace WebflowSharp.Services.Order
         /// </summary>
         /// <param name="siteId">	Unique identifier for the site</param>
         /// <param name="queryParameters">Order query parameters</param>
-        public virtual async Task<OrderQueryResponse> GetOrders(string siteId, OrderQueryParameters queryParameters = null)
+        public virtual async Task<List<OrderModel>> GetOrders(string siteId, OrderQueryParameters queryParameters = null)
         {
             var req = PrepareRequest($"sites/{siteId}/orders");
             if (queryParameters != null) req.QueryParams.AddRange(queryParameters.ToParameters());
-            return await ExecuteRequestAsync<OrderQueryResponse>(req, HttpMethod.Get);
+            return await ExecuteRequestAsync<List<OrderModel>>(req, HttpMethod.Get);
         }
 
         /// <summary>
