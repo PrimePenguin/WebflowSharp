@@ -10,6 +10,14 @@ namespace WebflowSharp.Entities
 
     public class UpdateInventoryFields
     {
+        public UpdateInventoryFields()
+        {
+            InventoryType = "finite";
+        }
+
+        [JsonProperty("_id")]
+        public string InventorId { get; set; }
+
         /// <summary>
         /// Immediately sets quantity to this value
         /// </summary>
@@ -21,11 +29,5 @@ namespace WebflowSharp.Entities
         /// </summary>
         [JsonProperty("inventoryType")]
         public string InventoryType { get; set; }
-
-        /// <summary>
-        /// Adds this quantity to currently store quantity. Can be negative.
-        /// </summary>
-        [JsonProperty("updateQuantity")]
-        public int? UpdateQuantity { get; set; }
     }
 }

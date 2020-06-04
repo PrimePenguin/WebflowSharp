@@ -86,6 +86,9 @@ namespace WebflowSharp.Entities
 
         [JsonIgnore]
         public ItemInventoryResponse Inventory { get; set; }
+
+        [JsonIgnore]
+        public string SiteId { get; set; }
     }
 
     public class Price

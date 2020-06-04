@@ -65,6 +65,9 @@ namespace WebflowSharp.Entities
 
         [JsonProperty("category", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> Category { get; set; }
+
+        [JsonIgnore]
+        public string SiteId { get; set; }
     }
 
     public class SkuProperty

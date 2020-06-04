@@ -135,6 +135,9 @@ namespace WebflowSharp.Entities
         /// 	An array of additional inputs for custom order data gathering. Each object in the array represents an input with a name, and a textInput, textArea, or checkbox value.
         /// </summary>
         [JsonProperty("customData")] public List<CustomDatum> CustomData { get; set; }
+
+        [JsonIgnore]
+        public string SiteId { get; set; }
     }
 
     public class Address
