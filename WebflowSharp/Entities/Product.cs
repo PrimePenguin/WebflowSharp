@@ -58,7 +58,7 @@ namespace WebflowSharp.Entities
         public string DefaultSku { get; set; }
 
         [JsonProperty("_cid")]
-        public string Cid { get; set; }
+        public string CollectionId { get; set; }
 
         [JsonProperty("_id")]
         public string Id { get; set; }

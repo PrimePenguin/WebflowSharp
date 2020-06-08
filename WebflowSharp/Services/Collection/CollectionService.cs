@@ -60,12 +60,24 @@ namespace WebflowSharp.Services.Collection
         /// <param name="collectionId">Unique identifier for the Collection you are querying</param>
         /// <param name="itemId">Unique identifier for the Item you are querying</param>
         /// <returns>The <see cref="Order"/>.</returns>
-        public virtual async Task<VariantQueryResponse> GetCollectionItemById(string collectionId, string itemId)
+        public virtual async Task<VariantQueryResponse> GetCollectionVariantById(string collectionId, string itemId)
         {
             var req = PrepareRequest($"collections/{collectionId}/items/{itemId}");
             return await ExecuteRequestAsync<VariantQueryResponse>(req, HttpMethod.Get);
         }
 
+        /// <summary>
+        /// Get Single Item
+        /// </summary>
+        /// <param name="collectionId">Unique identifier for the Collection you are querying</param>
+        /// <param name="itemId">Unique identifier for the Item you are querying</param>
+        /// <returns>The <see cref="Order"/>.</returns>
+        public virtual async Task<ProductQueryResponse> GetCollectionProductById(string collectionId, string itemId)
+        {
+            var req = PrepareRequest($"collections/{collectionId}/items/{itemId}");
+            return await ExecuteRequestAsync<ProductQueryResponse>(req, HttpMethod.Get);
+        }
+        
         /// <summary>
         /// An “update item” request" replaces the fields of an existent item with the fields specified in the payload.
         /// </summary>

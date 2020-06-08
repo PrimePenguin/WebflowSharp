@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>WebflowSharp</AssemblyName>
     <RootNamespace>WebflowSharp</RootNamespace>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
   </PropertyGroup>
   <PropertyGroup>
     <Description>WebflowSharp is a C# and .NET library that helps developers easily authenticate with and manage Webflow stores.</Description>
