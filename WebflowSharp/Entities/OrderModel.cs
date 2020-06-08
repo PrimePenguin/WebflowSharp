@@ -89,17 +89,17 @@ namespace WebflowSharp.Entities
         /// <summary>
         /// 	All addresses provided by the customer during the ordering flow, with keys: type (“shipping” or “billing”), japanType (null, “kana”, or “kanji”), addressee, line1, line2, city, state, country, and postalCode.
         /// </summary>
-        [JsonProperty("allAddresses")] public List<Address> AllAddresses { get; set; }
+        [JsonProperty("allAddresses")] public List<CheckoutAddress> AllAddresses { get; set; }
 
         /// <summary>
         /// 	The shipping address associated with the order in the shape from allAddresses
         /// </summary>
-        [JsonProperty("shippingAddress")] public Address ShippingAddress { get; set; }
+        [JsonProperty("shippingAddress")] public CheckoutAddress ShippingAddress { get; set; }
 
         /// <summary>
         /// 	The billing address associated with the order in the shape from allAddresses
         /// </summary>
-        [JsonProperty("billingAddress")] public Address BillingAddress { get; set; }
+        [JsonProperty("billingAddress")] public CheckoutAddress BillingAddress { get; set; }
 
         /// <summary>
         /// 	An array of all things that the customer purchased.
@@ -140,7 +140,7 @@ namespace WebflowSharp.Entities
         public string SiteId { get; set; }
     }
 
-    public class Address
+    public class CheckoutAddress
     {
         [JsonProperty("type")] public string Type { get; set; }
 

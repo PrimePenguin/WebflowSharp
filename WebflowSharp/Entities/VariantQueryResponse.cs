@@ -84,10 +84,10 @@ namespace WebflowSharp.Entities
         [JsonProperty("_id")]
         public string Id { get; set; }
 
-        [JsonIgnore]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public ItemInventoryResponse Inventory { get; set; }
 
-        [JsonIgnore]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string SiteId { get; set; }
     }
 
