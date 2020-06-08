@@ -1,6 +1,6 @@
-namespace WebflowSharp
+namespace WebflowSharp.Extensions
 {
-    internal static class StringExtensions
+    public static class StringExtensions
     {
         /// <summary>
         /// Checks if a string starts with another string, ignoring case.

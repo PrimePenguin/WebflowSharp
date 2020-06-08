@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace WebflowSharp
+namespace WebflowSharp.Extensions
 {
-    internal static class DictionaryExtensions
+    public static class DictionaryExtensions
     {
         public static void AddRange(this IDictionary<string, object> dictionary, IEnumerable<KeyValuePair<string, object>> kvps)
         {

@@ -3,11 +3,11 @@ using Newtonsoft.Json;
 namespace WebflowSharp.Infrastructure
 {
     /// <summary>
-    /// Contains JSON serialization settings and methods used by the rest of the WebflowSharp package.
+    /// Contains JSON serialization settings and methods used by the rest of the SquareSpaceSharp package.
     /// </summary>
     public static class Serializer
     {
-        public static JsonSerializerSettings Settings { get; } = new JsonSerializerSettings()
+        public static JsonSerializerSettings Settings { get; } = new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
         };

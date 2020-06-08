@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace WebflowSharp.Infrastructure
 {
@@ -12,7 +9,7 @@ namespace WebflowSharp.Infrastructure
         {
             if (content != null)
             {
-                this.Content = content;
+                Content = content;
             }
         }
 

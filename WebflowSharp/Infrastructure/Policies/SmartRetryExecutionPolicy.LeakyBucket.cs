@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WebflowSharp
+namespace WebflowSharp.Infrastructure.Policies
 {
     public partial class SmartRetryExecutionPolicy
     {
@@ -33,27 +33,24 @@ namespace WebflowSharp
 
             public void SetState(LeakyBucketState bucketInfo)
             {
-                //Shopify Plus customers have a bucket that is twice the size (80) so we resize the bucket capacity accordingly
-                //It is apparently possible to request the bucket size to be even larger
-                //https://ecommerce.shopify.com/c/shopify-apis-and-technology/t/what-is-the-default-api-call-limit-on-shopify-stores-407292
                 //Note that when the capacity doubles, the leak rate also doubles. So, not only can request bursts be larger, it is also possible to sustain a faster rate over the long term.
-                if (bucketInfo.Capacity > this._bucketCapacity)
+                if (bucketInfo.Capacity > _bucketCapacity)
                 {
                     lock (_semaphore)
                     {
-                        if (bucketInfo.Capacity > this._bucketCapacity)
+                        if (bucketInfo.Capacity > _bucketCapacity)
                         {
-                            _semaphore.Release(bucketInfo.Capacity - this._bucketCapacity);
+                            _semaphore.Release(bucketInfo.Capacity - _bucketCapacity);
                             _bucketCapacity = bucketInfo.Capacity;
                             _leakRate = bucketInfo.Capacity / DEFAULT_BUCKET_CAPACITY;
                         }
                     }
                 }
-                //Corrects the grant capacity of the bucket based on the size returned by Shopify.
-                //Shopify may know that the remaining capacity is less than we think it is (for example if multiple programs are using that same token)
-                //Shopify may also think that the remaining capacity is more than we know, but we do not ever empty the bucket because Shopify is not
+                //Corrects the grant capacity of the bucket based on the size returned by SquareSpace.
+                //SquareSpace may know that the remaining capacity is less than we think it is (for example if multiple programs are using that same token)
+                //SquareSpace may also think that the remaining capacity is more than we know, but we do not ever empty the bucket because SquareSpace is not
                 //considering requests that we know are already in flight.
-                int grantCapacity = this._bucketCapacity - bucketInfo.CurrentFillLevel;
+                int grantCapacity = _bucketCapacity - bucketInfo.CurrentFillLevel;
 
                 while (_semaphore.CurrentCount > grantCapacity)
                 {

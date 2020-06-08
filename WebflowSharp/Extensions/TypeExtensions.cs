@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace WebflowSharp
+namespace WebflowSharp.Extensions
 {
-    internal static class TypeExtensions
+    public static class TypeExtensions
     {
         public static IEnumerable<PropertyInfo> GetAllDeclaredProperties(this Type type)
         {
