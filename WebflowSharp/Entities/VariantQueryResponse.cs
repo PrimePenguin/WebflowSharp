@@ -28,16 +28,16 @@ namespace WebflowSharp.Entities
         public Dictionary<string, string> SkuValues { get; set; }
 
         [JsonProperty("width", NullValueHandling = NullValueHandling.Ignore)]
-        public long? Width { get; set; }
+        public decimal? Width { get; set; }
 
         [JsonProperty("length", NullValueHandling = NullValueHandling.Ignore)]
-        public long? Length { get; set; }
+        public decimal? Length { get; set; }
 
         [JsonProperty("height", NullValueHandling = NullValueHandling.Ignore)]
-        public long? Height { get; set; }
+        public decimal? Height { get; set; }
 
         [JsonProperty("weight", NullValueHandling = NullValueHandling.Ignore)]
-        public long? Weight { get; set; }
+        public decimal? Weight { get; set; }
 
         [JsonProperty("download-files")]
         public List<object> DownloadFiles { get; set; }
@@ -97,7 +97,7 @@ namespace WebflowSharp.Entities
         public string Unit { get; set; }
 
         [JsonProperty("value")]
-        public long Value { get; set; }
+        public decimal? Value { get; set; }
     }
 
     public class MainImage
