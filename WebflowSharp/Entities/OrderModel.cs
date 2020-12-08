@@ -156,7 +156,7 @@ namespace WebflowSharp.Entities
 
         [JsonProperty("country")] public string Country { get; set; }
 
-        [JsonProperty("postalCode")] public long PostalCode { get; set; }
+        [JsonProperty("postalCode")] public string PostalCode { get; set; }
     }
 
     public class CustomDatum
