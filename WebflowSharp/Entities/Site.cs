@@ -15,7 +15,7 @@ namespace WebflowSharp.Entities
         /// 	Date the site was created
         /// </summary>
         [JsonProperty("createdOn")]
-        public DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset? CreatedOn { get; set; }
 
         /// <summary>
         /// 	Name given to site
@@ -33,13 +33,13 @@ namespace WebflowSharp.Entities
         /// Date site was last published
         /// </summary>
         [JsonProperty("lastPublished")]
-        public DateTimeOffset LastPublished { get; set; }
+        public DateTimeOffset? LastPublished { get; set; }
 
         /// <summary>
         /// URL of a generated image for the given site
         /// </summary>
         [JsonProperty("previewUrl")]
-        public Uri PreviewUrl { get; set; }
+        public string PreviewUrl { get; set; }
 
         /// <summary>
         /// 	Site timezone set under Site Settings

@@ -29,7 +29,7 @@ namespace WebflowSharp.Entities
         /// <summary>
         /// 	The ISO8601 timestamp that an order was placed.
         /// </summary>
-        [JsonProperty("acceptedOn")] public DateTimeOffset AcceptedOn { get; set; }
+        [JsonProperty("acceptedOn")] public DateTimeOffset? AcceptedOn { get; set; }
 
         /// <summary>
         /// 	If an order was disputed by the customer, then this key will be set with the ISO8601 timestamp that Stripe notifies Webflow. Null if not disputed.
@@ -163,7 +163,6 @@ namespace WebflowSharp.Entities
     {
         [JsonProperty("textInput", NullValueHandling = NullValueHandling.Ignore)]
         public string TextInput { get; set; }
-
         [JsonProperty("name")] public string Name { get; set; }
 
         [JsonProperty("textArea", NullValueHandling = NullValueHandling.Ignore)]
@@ -275,7 +274,7 @@ namespace WebflowSharp.Entities
     {
         [JsonProperty("fileId")] public string FileId { get; set; }
 
-        [JsonProperty("url")] public Uri Url { get; set; }
+        [JsonProperty("url")] public string Url { get; set; }
     }
 
     public class StripeCard
