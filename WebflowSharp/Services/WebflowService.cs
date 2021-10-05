@@ -57,6 +57,24 @@ namespace WebflowSharp.Services
             return builder.Uri;
         }
 
+        /// <summary>
+        /// Sets the execution policy for this instance only. This policy will always be used over the global execution policy.
+        /// The instance will revert back to the global execution policy if you pass null to this method.
+        /// </summary>
+        public void SetExecutionPolicy(IRequestExecutionPolicy executionPolicy)
+        {
+            // If the user passes null, revert to the global execution policy.
+            _ExecutionPolicy = executionPolicy ?? _GlobalExecutionPolicy ?? new DefaultRequestExecutionPolicy();
+        }
+
+        /// <summary>
+        /// Sets the global execution policy for all *new* instances. Current instances are unaffected, but you can call .SetExecutionPolicy on them.
+        /// </summary>
+        public static void SetGlobalExecutionPolicy(IRequestExecutionPolicy globalExecutionPolicy)
+        {
+            _GlobalExecutionPolicy = globalExecutionPolicy;
+        }
+
         protected RequestUri PrepareRequest(string path)
         {
             return new RequestUri(new Uri($"https://api.webflow.com/{path}"));
