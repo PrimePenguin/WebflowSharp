@@ -21,11 +21,5 @@ namespace WebflowSharp.Entities
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }
-
-        /// <summary>
-        /// Optional filter for selecting which events you want webhooks to be triggered for.
-        /// </summary>
-        [JsonProperty("filter")]
-        public string Filter { get; set; }
     }
 }
